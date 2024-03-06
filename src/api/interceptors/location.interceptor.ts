@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 export class LocationInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest<Request>();
-    const basePath = `/api/v1${request.baseUrl}`;
+    const basePath = request.originalUrl;
 
     return next.handle().pipe(
       map((response) => {
