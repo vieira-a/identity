@@ -1,6 +1,6 @@
+import { UserGroupEntity } from '../../../domain/user-group/entities/user-group.entity';
 import { CreateUserGroup } from '../../../domain/user-group/usecases/create-user-group.usecase';
-import { CreateUserGroupInput } from '../inputs/create-user-group.input';
 
 export interface DbUserGroup extends CreateUserGroup {
-  create: (data: CreateUserGroupInput) => Promise<boolean>;
+  create: (data: UserGroupEntity) => Promise<UserGroupEntity>;
 }
