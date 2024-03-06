@@ -1,6 +1,7 @@
 import { Body, Controller, Post, UseInterceptors } from '@nestjs/common';
-import { LocationInterceptor } from 'src/api/interceptors/location.interceptor';
 
+import { LocationInterceptor } from '../../../api/interceptors/location.interceptor';
+import { UserGroupPresenter } from '../../../api/presenters/user-group/user-group.presenter';
 import { CreateUserGroupInput } from '../../../application/user-group/inputs/create-user-group.input';
 import { CreateUserGroupOutput } from '../../../application/user-group/outputs/create-user-group.output';
 import { CreateUserGroupService } from '../../../application/user-group/services/create-user-group.service';
@@ -9,6 +10,7 @@ import { CreateUserGroupService } from '../../../application/user-group/services
 export class CreateUserGroupController {
   constructor(
     private readonly createUserGroupService: CreateUserGroupService,
+    private readonly userGroupPresenter: UserGroupPresenter,
   ) {}
 
   @Post()
@@ -17,12 +19,6 @@ export class CreateUserGroupController {
     @Body() data: CreateUserGroupInput,
   ): Promise<CreateUserGroupOutput> {
     const output = await this.createUserGroupService.create(data);
-    if (output) {
-      return {
-        success: true,
-        message: 'Grupo de usuário cadastrado com sucesso',
-        data: output.guid,
-      };
-    }
+    return await this.userGroupPresenter.createUserGroupResult(output.guid);
   }
 }
