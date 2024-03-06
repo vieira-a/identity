@@ -1,4 +1,5 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseInterceptors } from '@nestjs/common';
+import { LocationInterceptor } from 'src/api/interceptors/location.interceptor';
 
 import { CreateUserGroupInput } from '../../../application/user-group/inputs/create-user-group.input';
 import { CreateUserGroupOutput } from '../../../application/user-group/outputs/create-user-group.output';
@@ -11,6 +12,7 @@ export class CreateUserGroupController {
   ) {}
 
   @Post()
+  @UseInterceptors(LocationInterceptor)
   async handler(
     @Body() data: CreateUserGroupInput,
   ): Promise<CreateUserGroupOutput> {
@@ -19,6 +21,7 @@ export class CreateUserGroupController {
       return {
         success: true,
         message: 'Grupo de usuário cadastrado com sucesso',
+        data: output.guid,
       };
     }
   }
