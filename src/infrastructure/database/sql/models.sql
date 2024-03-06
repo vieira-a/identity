@@ -16,7 +16,8 @@ CREATE TABLE identity_groups (
     ds_group VARCHAR(30) not null,
     dh_created_at timestamp with time zone not null default now(),
     dh_updated_at timestamp with time zone not null default now(),
-    dh_deleted_at timestamp with time zone not null default now()
+    dh_deleted_at timestamp with time zone not null default now(),
+    UNIQUE (ds_group)
 );
 
 CREATE TABLE account_users (

@@ -8,7 +8,7 @@ import { DbUserGroupRepository } from '../../../infrastructure/database/access/r
 export class CreateUserGroupService implements CreateUserGroup {
   constructor(private readonly userGroupRepository: DbUserGroupRepository) {}
 
-  async create(data: UserGroupEntity): Promise<boolean> {
+  async create(data: UserGroupEntity): Promise<UserGroupEntity> {
     return await this.userGroupRepository.create(data);
   }
 }

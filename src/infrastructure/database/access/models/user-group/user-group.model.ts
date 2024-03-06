@@ -19,7 +19,7 @@ export class UserGroupModel extends CreateUserGroupInput {
   @PrimaryGeneratedColumn('uuid', { name: 'cd_guid' })
   public guid?: string;
 
-  @Column({ name: 'ds_group', nullable: false, length: 30 })
+  @Column({ name: 'ds_group', nullable: false, length: 30, unique: true })
   public description: string;
 
   @Column({ name: 'cd_module_id', nullable: false })
