@@ -13,7 +13,7 @@ export class DbUserGroupRepository implements DbUserGroup {
     private readonly repository: Repository<UserGroupModel>,
   ) {}
 
-  async create(data: CreateUserGroupInput): Promise<CreateUserGroupInput> {
+  async create(data: CreateUserGroupInput): Promise<UserGroupModel> {
     return await this.repository.save(data);
   }
 }

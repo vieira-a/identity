@@ -5,20 +5,27 @@ CREATE TYPE account_user_status as enum ('active', 'inactive', 'blocked', 'expir
 CREATE TABLE system_modules (
   cd_module SERIAL NOT NULL PRIMARY KEY,
   cd_guid uuid NOT NULL DEFAULT uuid_generate_v4(),
-  ds_module VARCHAR(255)
+  ds_module VARCHAR(255) 
 );
 
 CREATE TABLE identity_groups (
-    cd_group SERIAL NOT NULL PRIMARY KEY,
-    cd_guid uuid NOT NULL DEFAULT uuid_generate_v4(),
-    cd_module_id INT,
-    FOREIGN KEY (cd_module_id) REFERENCES system_modules (cd_module),
-    ds_group VARCHAR(30) not null,
-    dh_created_at timestamp with time zone not null default now(),
-    dh_updated_at timestamp with time zone not null default now(),
-    dh_deleted_at timestamp with time zone not null default now(),
-    UNIQUE (ds_group)
+  cd_group SERIAL NOT NULL PRIMARY KEY,
+  cd_guid uuid NOT NULL DEFAULT uuid_generate_v4(),
+  ds_group VARCHAR(30) NOT NULL UNIQUE,
+  dh_created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+  dh_updated_at TIMESTAMP WITH TIME ZONE,
+  dh_deleted_at TIMESTAMP WITH TIME ZONE
 );
+
+CREATE TABLE group_modules (
+    cd_group_module SERIAL NOT NULL PRIMARY KEY,
+    cd_group_guid uuid NOT NULL,
+    cd_module_guid uuid NOT NULL,
+    FOREIGN KEY (cd_group_guid) REFERENCES identity_groups (cd_guid),
+    FOREIGN KEY (cd_module_guid) REFERENCES system_modules (cd_guid),
+    UNIQUE (cd_group_guid, cd_module_guid)
+);
+
 
 CREATE TABLE account_users (
     cd_user SERIAL NOT NULL PRIMARY KEY,

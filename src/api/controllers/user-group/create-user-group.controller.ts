@@ -18,7 +18,11 @@ export class CreateUserGroupController {
   async handler(
     @Body() data: CreateUserGroupInput,
   ): Promise<CreateUserGroupOutput> {
-    const output = await this.createUserGroupService.create(data);
-    return await this.userGroupPresenter.createUserGroupResult(output.guid);
+    try {
+      const output = await this.createUserGroupService.create(data);
+      return await this.userGroupPresenter.createUserGroupResult(output.guid);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
