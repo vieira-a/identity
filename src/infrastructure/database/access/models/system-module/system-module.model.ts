@@ -1,15 +1,7 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-
-import { UserGroupModel } from '../user-group/user-group.model';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('system_modules')
-export class SystemModule {
+export class SystemModuleModel {
   @PrimaryGeneratedColumn('increment', { name: 'cd_module' })
   public id?: number;
 
@@ -18,8 +10,4 @@ export class SystemModule {
 
   @Column({ name: 'ds_module', nullable: false, length: 255 })
   public description: string;
-
-  @ManyToOne(() => UserGroupModel, (group) => group.modules)
-  @JoinColumn({ name: 'cd_group' })
-  public moduleId: number;
 }
