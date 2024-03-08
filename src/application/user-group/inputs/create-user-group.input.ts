@@ -1,4 +1,10 @@
-import { IsNotEmpty, MaxLength, MinLength } from 'class-validator';
+import {
+  ArrayNotEmpty,
+  IsNotEmpty,
+  IsUUID,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 import { UserGroupEntity } from '../../../domain/user-group/entities/user-group.entity';
 
@@ -8,5 +14,7 @@ export class CreateUserGroupInput extends UserGroupEntity {
   @IsNotEmpty({ message: 'Campo obrigatório' })
   description: string;
 
-  moduleId: number;
+  @IsUUID(4, { each: true, message: 'Código do grupo com formato inválido' })
+  @ArrayNotEmpty({ message: 'Pelo menos um módulo é obrigatório' })
+  modules: string[];
 }
