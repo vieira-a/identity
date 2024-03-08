@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UserGroupOutput } from 'src/application/user-group/outputs';
 import { Repository } from 'typeorm';
 
 import { CreateUserGroupInput } from '../../../../../application/user-group/inputs/create-user-group.input';
@@ -15,5 +16,9 @@ export class DbUserGroupRepository implements DbUserGroup {
 
   async create(data: CreateUserGroupInput): Promise<UserGroupModel> {
     return await this.repository.save(data);
+  }
+
+  async readAll(): Promise<UserGroupOutput[]> {
+    return await this.repository.find();
   }
 }
