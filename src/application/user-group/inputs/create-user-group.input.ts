@@ -6,7 +6,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-import { UserGroupEntity } from '../../../domain/user-group/entities/user-group.entity';
+import { UserGroupEntity } from '../../../domain/user-group/entities';
 
 export class CreateUserGroupInput extends UserGroupEntity {
   @MinLength(3, { message: 'Campo precisa ter no mínimo 3 caracteres' })

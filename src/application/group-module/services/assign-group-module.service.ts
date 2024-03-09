@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
-import { GroupModuleEntity } from '../../../domain/group-module/entities/group-module.entity';
-import { AssignGroupModule } from '../../../domain/group-module/usecases/group-module.usecase';
-import { DbAssignGroupModuleRepository } from '../../../infrastructure/database/access/repositories/group-module/db-group-module.repository';
+import { GroupModuleEntity } from '../../../domain/group-module/entities';
+import { AssignGroupModule } from '../../../domain/group-module/usecases';
+import { DbAssignGroupModuleRepository } from '../../../infrastructure/database/access/repositories/group-module';
 
 @Injectable()
 export class AssignGroupModuleService implements AssignGroupModule {

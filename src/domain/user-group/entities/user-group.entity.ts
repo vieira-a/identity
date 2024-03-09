@@ -1,4 +1,4 @@
-import { EntityBase } from '../../../domain/data/entities/base.entity';
+import { EntityBase } from '../../../domain/data/entities';
 
 export class UserGroupEntity extends EntityBase {
   description: string;

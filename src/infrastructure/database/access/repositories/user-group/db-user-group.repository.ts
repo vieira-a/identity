@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { CreateUserGroupInput } from '../../../../../application/user-group/inputs/create-user-group.input';
+import { CreateUserGroupInput } from '../../../../../application/user-group/inputs';
 import { UserGroupOutput } from '../../../../../application/user-group/outputs';
-import { DbUserGroup } from '../../../../../application/user-group/usecases/db-user-group.usecase';
+import { DbUserGroup } from '../../../../../application/user-group/usecases';
 import { userGroupResponseMapper } from '../../../mappers';
-import { UserGroupModel } from '../../models/user-group/user-group.model';
+import { UserGroupModel } from '../../models/user-group';
 
 @Injectable()
 export class DbUserGroupRepository implements DbUserGroup {

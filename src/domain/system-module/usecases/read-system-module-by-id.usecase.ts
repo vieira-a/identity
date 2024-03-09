@@ -1,4 +1,4 @@
-import { SystemModuleEntity } from '../entities/system-module.entity';
+import { SystemModuleEntity } from '../entities';
 
 export class ReadSystemModuleById {
   readById: (guid: string) => Promise<SystemModuleEntity>;

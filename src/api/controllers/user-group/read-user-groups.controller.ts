@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 
-import { UserGroupPresenter } from '../../../api/presenters/user-group/user-group.presenter';
+import { UserGroupPresenter } from '../../../api/presenters/user-group';
 import { ReadUserGroupsService } from '../../../application/user-group/services';
 
 @Controller('user-group')

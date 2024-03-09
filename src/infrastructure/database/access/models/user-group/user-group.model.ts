@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { CreateUserGroupInput } from '../../../../../application/user-group/inputs/create-user-group.input';
+import { CreateUserGroupInput } from '../../../../../application/user-group/inputs';
 
 @Entity('identity_groups')
 export class UserGroupModel extends CreateUserGroupInput {
