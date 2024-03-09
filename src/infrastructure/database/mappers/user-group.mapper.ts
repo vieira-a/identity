@@ -1,6 +1,6 @@
-import { UserGroupEntity } from '../../../domain/user-group/entities';
+import { UserGroupModel } from '../access/models/user-group/user-group.model';
 
-export const userGroupResponseMapper = (output: Partial<UserGroupEntity[]>) => {
+export const userGroupResponseMapper = (output: UserGroupModel[]) => {
   return output.map((group) => ({
     id: group.guid,
     description: group.description,
