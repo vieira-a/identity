@@ -1,3 +1,5 @@
-import { UserGroupEntity } from '../../../domain/user-group/entities/user-group.entity';
-
-export class UserGroupOutput extends UserGroupEntity {}
+export class UserGroupOutput {
+  guid?: string;
+  description: string;
+  modules: string[];
+}

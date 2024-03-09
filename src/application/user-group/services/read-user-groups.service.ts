@@ -8,7 +8,7 @@ import { DbUserGroupRepository } from '../../../infrastructure/database/access/r
 export class ReadUserGroupsService implements ReadUserGroups {
   constructor(private readonly userGroupRepository: DbUserGroupRepository) {}
 
-  async readAll(): Promise<UserGroupEntity[]> {
+  async readAll(): Promise<Partial<UserGroupEntity[]>> {
     return await this.userGroupRepository.readAll();
   }
 }

@@ -1,11 +1,17 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { CreateUserGroupController } from '../api/controllers/user-group/create-user-group.controller';
+import {
+  CreateUserGroupController,
+  ReadUserGroupsController,
+} from '../api/controllers/user-group';
 import { UserGroupPresenter } from '../api/presenters/user-group/user-group.presenter';
 import { AssignGroupModuleService } from '../application/group-module/services/assign-group-module.service';
 import { ReadSystemModuleByIdService } from '../application/system-module/services/read-system-module-by-id.service';
-import { CreateUserGroupService } from '../application/user-group/services/create-user-group.service';
+import {
+  CreateUserGroupService,
+  ReadUserGroupsService,
+} from '../application/user-group/services';
 import { GroupModuleModel } from '../infrastructure/database/access/models/group-module/group-module.model';
 import { SystemModuleModel } from '../infrastructure/database/access/models/system-module/system-module.model';
 import { UserGroupModel } from '../infrastructure/database/access/models/user-group/user-group.model';
@@ -23,6 +29,7 @@ import { DbUserGroupRepository } from '../infrastructure/database/access/reposit
   ],
   providers: [
     CreateUserGroupService,
+    ReadUserGroupsService,
     DbUserGroupRepository,
     AssignGroupModuleService,
     DbAssignGroupModuleRepository,
@@ -30,6 +37,6 @@ import { DbUserGroupRepository } from '../infrastructure/database/access/reposit
     ReadSystemModuleByIdService,
     UserGroupPresenter,
   ],
-  controllers: [CreateUserGroupController],
+  controllers: [CreateUserGroupController, ReadUserGroupsController],
 })
 export class UserGroupModule {}
