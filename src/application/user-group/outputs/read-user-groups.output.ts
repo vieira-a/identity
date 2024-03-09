@@ -1,5 +1,3 @@
-export class UserGroupOutput {
-  guid?: string;
-  description: string;
-  modules: string[];
-}
+import { UserGroupDto } from '../../../domain/user-group/dtos';
+
+export class UserGroupOutput extends UserGroupDto {}

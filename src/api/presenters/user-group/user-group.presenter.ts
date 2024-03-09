@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { userGroupResponseMapper } from 'src/api/transports/user-group';
 
 import {
   CreateUserGroupResponse,
@@ -29,9 +28,14 @@ export class UserGroupPresenter {
   async readUserGroupsResult(
     output: Partial<UserGroupOutput[]>,
   ): Promise<ReadUserGroupsResponse> {
-    return {
-      success: true,
-      data: userGroupResponseMapper(output),
-    };
+    if (output || output.length > 0) {
+      return {
+        data: output,
+      };
+    } else {
+      return {
+        data: [],
+      };
+    }
   }
 }
