@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { AssignGroupModuleService } from '../../../application/group-module/services/assign-group-module.service';
-import { ReadSystemModuleByIdService } from '../../../application/system-module/services/read-system-module-by-id.service';
-import { UserGroupEntity } from '../../../domain/user-group/entities/user-group.entity';
-import { CreateUserGroup } from '../../../domain/user-group/usecases/create-user-group.usecase';
-import { DbUserGroupRepository } from '../../../infrastructure/database/access/repositories/user-group/db-user-group.repository';
+import { AssignGroupModuleService } from '../../../application/group-module/services';
+import { ReadSystemModuleByIdService } from '../../../application/system-module/services';
+import { UserGroupEntity } from '../../../domain/user-group/entities';
+import { CreateUserGroup } from '../../../domain/user-group/usecases';
+import { DbUserGroupRepository } from '../../../infrastructure/database/access/repositories/user-group';
 
 @Injectable()
 export class CreateUserGroupService implements CreateUserGroup {

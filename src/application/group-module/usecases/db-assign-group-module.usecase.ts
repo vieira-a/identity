@@ -1,5 +1,5 @@
-import { AssignGroupModule } from '../../../domain/group-module/usecases/group-module.usecase';
-import { AssignGroupModuleInput } from '../inputs/assign-group-module.input';
+import { AssignGroupModule } from '../../../domain/group-module/usecases';
+import { AssignGroupModuleInput } from '../inputs';
 
 export interface DbAssignGroupModule extends AssignGroupModule {
   assign: (data: AssignGroupModuleInput) => Promise<void>;

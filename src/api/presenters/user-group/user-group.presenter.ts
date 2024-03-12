@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { CreateUserGroupResponse } from '../../../api/responses/user-group/create-user.group.response';
+import {
+  CreateUserGroupResponse,
+  ReadUserGroupsResponse,
+} from '../../../api/responses/user-group';
+import { UserGroupOutput } from '../../../application/user-group/outputs';
 
 @Injectable()
 export class UserGroupPresenter {
@@ -17,6 +21,20 @@ export class UserGroupPresenter {
       return {
         success: false,
         message: 'Houve uma falha ao criar grupo de usuários',
+      };
+    }
+  }
+
+  async readUserGroupsResult(
+    output: Partial<UserGroupOutput[]>,
+  ): Promise<ReadUserGroupsResponse> {
+    if (output || output.length > 0) {
+      return {
+        data: output,
+      };
+    } else {
+      return {
+        data: [],
       };
     }
   }

@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { AssignGroupModuleInput } from '../../../../../application/group-module/inputs/assign-group-module.input';
-import { DbAssignGroupModule } from '../../../../../application/group-module/usecases/db-assign-group-module.usecase';
-import { GroupModuleModel } from '../../models/group-module/group-module.model';
+import { AssignGroupModuleInput } from '../../../../../application/group-module/inputs';
+import { DbAssignGroupModule } from '../../../../../application/group-module/usecases';
+import { GroupModuleModel } from '../../models/group-module';
 
 @Injectable()
 export class DbAssignGroupModuleRepository implements DbAssignGroupModule {

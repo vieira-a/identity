@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 
-import { SystemModuleEntity } from '../../../domain/system-module/entities/system-module.entity';
-import { ReadSystemModuleById } from '../../../domain/system-module/usecases/read-system-module-by-id.usecase';
-import { DbSystemModuleRepository } from '../../../infrastructure/database/access/repositories/system-module/db-system-module.repository';
+import { SystemModuleEntity } from '../../../domain/system-module/entities';
+import { ReadSystemModuleById } from '../../../domain/system-module/usecases';
+import { DbSystemModuleRepository } from '../../../infrastructure/database/access/repositories/system-module';
 
 @Injectable()
 export class ReadSystemModuleByIdService implements ReadSystemModuleById {
