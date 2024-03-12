@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 
-import { UserGroupPresenter } from '../../../api/presenters/user-group';
 import { ReadUserGroupsService } from '../../../application/user-group/services';
+import { UserGroupPresenter } from '../../presenters/user-group';
 
 @Controller('user-group')
 export class ReadUserGroupsController {
@@ -12,11 +12,7 @@ export class ReadUserGroupsController {
 
   @Get()
   async handler() {
-    try {
-      const output = await this.readUserGroupsService.readAll();
-      return await this.userGroupPresenter.readUserGroupsResult(output);
-    } catch (error) {
-      console.log(error);
-    }
+    const output = await this.readUserGroupsService.readAll();
+    return await this.userGroupPresenter.readUserGroupsResult(output);
   }
 }
