@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import {
   CreateUserGroupResponse,
+  ReadUserGroupByIdResponse,
   ReadUserGroupsResponse,
 } from '../../../api/responses/user-group';
 import { UserGroupOutput } from '../../../application/user-group/outputs';
@@ -35,6 +36,20 @@ export class UserGroupPresenter {
     } else {
       return {
         data: [],
+      };
+    }
+  }
+
+  async readUserGroupByIdResult(
+    output: UserGroupOutput,
+  ): Promise<ReadUserGroupByIdResponse> {
+    if (output) {
+      return {
+        data: output,
+      };
+    } else {
+      return {
+        data: null,
       };
     }
   }

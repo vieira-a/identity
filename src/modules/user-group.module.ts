@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import {
   CreateUserGroupController,
+  ReadUserGroupByIdController,
   ReadUserGroupsController,
 } from '../api/controllers/user-group';
 import { UserGroupPresenter } from '../api/presenters/user-group';
@@ -10,6 +11,7 @@ import { AssignGroupModuleService } from '../application/group-module/services';
 import { ReadSystemModuleByIdService } from '../application/system-module/services';
 import {
   CreateUserGroupService,
+  ReadUserGroupByIdService,
   ReadUserGroupsService,
 } from '../application/user-group/services';
 import { GroupModuleModel } from '../infrastructure/database/access/models/group-module';
@@ -30,6 +32,7 @@ import { DbUserGroupRepository } from '../infrastructure/database/access/reposit
   providers: [
     CreateUserGroupService,
     ReadUserGroupsService,
+    ReadUserGroupByIdService,
     DbUserGroupRepository,
     AssignGroupModuleService,
     DbAssignGroupModuleRepository,
@@ -37,6 +40,10 @@ import { DbUserGroupRepository } from '../infrastructure/database/access/reposit
     ReadSystemModuleByIdService,
     UserGroupPresenter,
   ],
-  controllers: [CreateUserGroupController, ReadUserGroupsController],
+  controllers: [
+    CreateUserGroupController,
+    ReadUserGroupsController,
+    ReadUserGroupByIdController,
+  ],
 })
 export class UserGroupModule {}
