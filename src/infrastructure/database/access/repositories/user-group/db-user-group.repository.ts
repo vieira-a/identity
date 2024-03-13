@@ -6,8 +6,8 @@ import { CreateUserGroupInput } from '../../../../../application/user-group/inpu
 import { UserGroupOutput } from '../../../../../application/user-group/outputs';
 import { DbUserGroup } from '../../../../../application/user-group/usecases';
 import {
-  userGroupByIdResponseMapper,
-  userGroupResponseMapper,
+  readUserGroupByIdMapper,
+  readUserGroupsMapper,
 } from '../../../mappers';
 import { UserGroupModel } from '../../models/user-group';
 
@@ -24,11 +24,11 @@ export class DbUserGroupRepository implements DbUserGroup {
 
   async readById(guid: string): Promise<UserGroupOutput> {
     const result = await this.repository.findOne({ where: { guid } });
-    return userGroupByIdResponseMapper(result);
+    return readUserGroupByIdMapper(result);
   }
 
   async readAll(): Promise<UserGroupOutput[]> {
     const result = await this.repository.find();
-    return userGroupResponseMapper(result);
+    return readUserGroupsMapper(result);
   }
 }
