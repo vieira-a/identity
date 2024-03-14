@@ -6,6 +6,7 @@ import {
   ReadUserGroups,
 } from '../../../domain/user-group/usecases';
 import { CreateUserGroupInput } from '../inputs';
+import { ReadUserGroupInput } from '../inputs/read-user-group-filter.input';
 
 export interface DbUserGroup
   extends CreateUserGroup,
@@ -13,5 +14,5 @@ export interface DbUserGroup
     ReadUserGroups {
   create: (data: CreateUserGroupInput) => Promise<CreateUserGroupInput>;
   readById: (guid: string) => Promise<UserGroupDto>;
-  readAll: () => Promise<PageDto<UserGroupDto>>;
+  readAll: (filter?: ReadUserGroupInput) => Promise<PageDto<UserGroupDto>>;
 }

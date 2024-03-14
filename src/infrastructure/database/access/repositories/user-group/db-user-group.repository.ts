@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { CreateUserGroupInput } from '../../../../../application/user-group/inputs';
+import { ReadUserGroupInput } from '../../../../../application/user-group/inputs/read-user-group-filter.input';
 import { UserGroupOutput } from '../../../../../application/user-group/outputs';
 import { DbUserGroup } from '../../../../../application/user-group/usecases';
 import {
@@ -32,7 +33,9 @@ export class DbUserGroupRepository implements DbUserGroup {
     return readUserGroupByIdMapper(result);
   }
 
-  async readAll(): Promise<PageDto<UserGroupOutput>> {
+  async readAll(
+    filter?: ReadUserGroupInput,
+  ): Promise<PageDto<UserGroupOutput>> {
     const pageOptionsDto = new PageOptionsDto();
 
     const queryBuilder = this.repository
@@ -41,6 +44,14 @@ export class DbUserGroupRepository implements DbUserGroup {
       .skip(pageOptionsDto.skip)
       .take(pageOptionsDto.take);
 
+    if (filter?.description) {
+      queryBuilder.andWhere(
+        'LOWER(identity_groups.ds_group) LIKE LOWER(:ds_group)',
+        {
+          ds_group: `%${filter.description}%`,
+        },
+      );
+    }
     const itemCount = await queryBuilder.getCount();
     const { entities } = await queryBuilder.getRawAndEntities();
 
