@@ -1,12 +1,18 @@
-import { UserGroupDto } from 'src/domain/user-group/dtos';
-
+import { PageDto } from '../../../domain/data/pagination/dto';
+import { UserGroupDto } from '../../../domain/user-group/dtos';
 import {
   CreateUserGroup,
+  ReadUserGroupById,
   ReadUserGroups,
 } from '../../../domain/user-group/usecases';
-import { CreateUserGroupInput } from '../inputs/create-user-group.input';
+import { CreateUserGroupInput } from '../inputs';
+import { ReadUserGroupInput } from '../inputs/read-user-group-filter.input';
 
-export interface DbUserGroup extends CreateUserGroup, ReadUserGroups {
+export interface DbUserGroup
+  extends CreateUserGroup,
+    ReadUserGroupById,
+    ReadUserGroups {
   create: (data: CreateUserGroupInput) => Promise<CreateUserGroupInput>;
-  readAll: () => Promise<UserGroupDto[]>;
+  readById: (guid: string) => Promise<UserGroupDto>;
+  readAll: (filter?: ReadUserGroupInput) => Promise<PageDto<UserGroupDto>>;
 }

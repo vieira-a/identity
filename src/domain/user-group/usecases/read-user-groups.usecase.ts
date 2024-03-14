@@ -1,5 +1,6 @@
-import { UserGroupDto } from '../dtos';
+import { PageDto } from '../../../domain/data/pagination/dto';
+import { UserGroupDto, UserGroupFilterDto } from '../dtos';
 
 export interface ReadUserGroups {
-  readAll: () => Promise<UserGroupDto[]>;
+  readAll: (filter?: UserGroupFilterDto) => Promise<PageDto<UserGroupDto>>;
 }

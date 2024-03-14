@@ -1,18 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 
 import { ReadUserGroupsService } from '../../../application/user-group/services';
-import { UserGroupPresenter } from '../../presenters/user-group';
 
 @Controller('user-group')
 export class ReadUserGroupsController {
-  constructor(
-    private readonly readUserGroupsService: ReadUserGroupsService,
-    private readonly userGroupPresenter: UserGroupPresenter,
-  ) {}
+  constructor(private readonly readUserGroupsService: ReadUserGroupsService) {}
 
   @Get()
-  async handler() {
-    const output = await this.readUserGroupsService.readAll();
-    return await this.userGroupPresenter.readUserGroupsResult(output);
+  async handler(@Query('description') description: string) {
+    const filter = { description };
+    return await this.readUserGroupsService.readAll(filter);
   }
 }
