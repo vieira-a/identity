@@ -1,5 +1,5 @@
-import { UserGroupDto } from 'src/domain/user-group/dtos';
-
+import { PageDto } from '../../../domain/data/pagination/dto';
+import { UserGroupDto } from '../../../domain/user-group/dtos';
 import {
   CreateUserGroup,
   ReadUserGroupById,
@@ -13,5 +13,5 @@ export interface DbUserGroup
     ReadUserGroups {
   create: (data: CreateUserGroupInput) => Promise<CreateUserGroupInput>;
   readById: (guid: string) => Promise<UserGroupDto>;
-  readAll: () => Promise<UserGroupDto[]>;
+  readAll: () => Promise<PageDto<UserGroupDto>>;
 }

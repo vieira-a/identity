@@ -6,6 +6,11 @@ import { CreateUserGroupInput } from '../../../../../application/user-group/inpu
 import { UserGroupOutput } from '../../../../../application/user-group/outputs';
 import { DbUserGroup } from '../../../../../application/user-group/usecases';
 import {
+  PageDto,
+  PageMetaDto,
+  PageOptionsDto,
+} from '../../../../../domain/data/pagination/dto';
+import {
   readUserGroupByIdMapper,
   readUserGroupsMapper,
 } from '../../../mappers';
@@ -27,8 +32,23 @@ export class DbUserGroupRepository implements DbUserGroup {
     return readUserGroupByIdMapper(result);
   }
 
-  async readAll(): Promise<UserGroupOutput[]> {
-    const result = await this.repository.find();
-    return readUserGroupsMapper(result);
+  async readAll(): Promise<PageDto<UserGroupOutput>> {
+    const pageOptionsDto = new PageOptionsDto();
+
+    const queryBuilder = this.repository
+      .createQueryBuilder('identity_groups')
+      .orderBy('ds_group', pageOptionsDto.order)
+      .skip(pageOptionsDto.skip)
+      .take(pageOptionsDto.take);
+
+    const itemCount = await queryBuilder.getCount();
+    const { entities } = await queryBuilder.getRawAndEntities();
+
+    const pageMetaDto = new PageMetaDto({
+      itemCount,
+      pageOptionsDto,
+    });
+
+    return new PageDto(readUserGroupsMapper(entities), pageMetaDto);
   }
 }
